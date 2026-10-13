@@ -1,6 +1,7 @@
 const path = require('node:path');
 const express = require('express');
 const app = express();
+const authRouter=require('./routes/authRouter');
 
 const assetsPath = path.join(__dirname, 'public');
 app.use(express.static(assetsPath));
@@ -10,9 +11,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send('Hello World !');
-});
+app.use('/', authRouter);
 
 const PORT = process.env.PORT || 3000;
 
