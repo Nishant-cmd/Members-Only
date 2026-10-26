@@ -1,5 +1,5 @@
 const pool = require("../db/pool");
-``;
+    
 async function createUser(firstName, lastName, email, password) {
   await pool.query(
     "INSERT INTO users(first_name,last_name,email,password) VALUES($1,$2,$3,$4)",
@@ -27,16 +27,24 @@ async function createMessage(userId, title, message) {
 }
 
 async function getAllMessages() {
-  const result = await pool.query("SELECT u.first_name, u.last_name,u.status, m.title, m.description, to_char(m.created_at,'YYYY/MM/DD, HH12:MI:SS AM') AS created_at FROM messages m JOIN users u ON m.user_id = u.id");
+  const result = await pool.query("SELECT u.first_name, u.last_name,u.status, m.id, m.user_id,m.title, m.description, to_char(m.created_at,'YYYY/MM/DD, HH12:MI:SS AM') AS created_at FROM messages m JOIN users u ON m.user_id = u.id");
   return result.rows;
 }
 
 async function getUserMessage(userId) {
   const result = await pool.query(
-    "SELECT u.first_name, u.last_name, u.status, m.title, m.description, to_char(m.created_at,'YYYY/MM/DD, HH12:MI:SS AM') AS created_at FROM messages m JOIN users u ON m.user_id = u.id WHERE m.user_id=$1",
+    "SELECT u.first_name, u.last_name, u.status,m.id, m.user_id,m.title, m.description, to_char(m.created_at,'YYYY/MM/DD, HH12:MI:SS AM') AS created_at FROM messages m JOIN users u ON m.user_id = u.id WHERE m.user_id=$1",
     [userId],
   );
   return result.rows;
+}
+
+async function updateUserStatus(userId, status) {
+  await pool.query("UPDATE users SET status=$1 WHERE id=$2", [status, userId]);
+}
+
+async function deleteMessage(messageId){
+  await pool.query('DELETE FROM messages WHERE id=$1', [messageId]);
 }
 
 module.exports = {
@@ -46,4 +54,6 @@ module.exports = {
   createMessage,
   getAllMessages,
   getUserMessage,
+  updateUserStatus,
+  deleteMessage
 };
