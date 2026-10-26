@@ -1,20 +1,23 @@
-const { Router}=require('express')
-const authRouter=Router();
+const { Router } = require('express');
+const { validateUser, validateMessage } = require('../controllers/validation');
+const authController = require('../controllers/authController');
+const userController = require('../controllers/userController');
+const requireAuth = require('../middleware/requireAuth');
 
-authRouter.get('/',(req,res)=>{
-    res.render('auth/login');
-})
+const router = Router();
 
-authRouter.post('/login',(req,res)=>{
-    // Perform authentication logic here
-});
+//Public route
+router.get('/', authController.getLogin);
+router.get('/register', authController.getRegsiter);
+router.post('/register', validateUser, userController.createUser);
 
-authRouter.get('/register',(req,res)=>{
-    res.render('auth/register');
-})
+//Authenticate submitted credentials
+router.post('/login', authController.postLogin);
 
-authRouter.post('/register',(req,res)=>{
-    // Perform registration logic here
-});
+//Protected route
+router.get('/message', requireAuth, authController.getMessage);
+router.get('/new-message', requireAuth, authController.getNewMessage);
+router.post('/new-message', requireAuth, validateMessage, userController.createMessage);
+router.use('/logout', requireAuth, authController.logOut);
 
-module.exports=authRouter;
+module.exports = router;
