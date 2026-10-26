@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Club | Members-Only</title>
+  </head>
+  <body>
+    <%- include("../partials/header") %>
+    <main class="join-club">
+      <h4>Join the Club</h4>
+      <form action="/join-club" method="POST">
+        <div>
+          <label for="passcode">Enter club passcode</label>
+          <input type="text" id="passcode" name="passcode" required />
+        </div>
+        <button type="submit">Join Club</button>
+      </form>
+      <a href="/message">Back to Messages</a>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>

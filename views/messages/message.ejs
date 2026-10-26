@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,29 +9,60 @@
 </head>
 
 <body>
-    <%-include("../partials/header") %>
-        <main class="messages">
-            <h4><%= title %></h4>
-            <% if (messages && messages.length> 0) { %>
-                <% messages.forEach(message=> { %>
-                    <div class="message-container">
-                        <p> <strong>
-                                <%= message.title %>
-                            </strong></p>
+    <%- include("../partials/header") %>
+
+    <main class="messages">
+        <h4><%= title %></h4>
+
+        <% if (messages && messages.length > 0) { %>
+
+            <% messages.forEach(message => { %>
+
+                <div class="message-container">
+                    <p>
+                        <strong><%= message.title %></strong>
+                    </p>
+
+                    <p>
+                        <%= message.description %>
+                    </p>
+
+                    <% if (isClubMember) { %>
                         <p>
-                            <%= message.description %>
+                            <span>
+                                From: <%= message.first_name %>
+                                <%= message.last_name %>
+                            </span>
+
+                            <span>
+                                Posted on: <%= message.created_at %>
+                            </span>
                         </p>
+                    <% } else { %>
                         <p>
-                            <span>from: <%=message.first_name %> <%=message.last_name %></span>
-                            <span> posted on: <%= message.created_at %></span>
+                            <span>From: an anonymous user</span>
                         </p>
-                    </div>
-                    <% }) %>
-                        <% } else { %>
-                            <p> No Message found.</p>
-                            <% } %>
-                         </main>
-        <%- include('../partials/footer.ejs') %>
+                    <% } %>
+
+                    <% if (message.user_id === userId) { %>
+                        <a href="/message/delete/<%= message.id %>">
+                            Delete
+                        </a>
+                    <% } %>
+
+                </div>
+
+            <% }); %>
+
+        <% } else { %>
+
+            <p>No messages found.</p>
+
+        <% } %>
+
+    </main>
+
+    <%- include("../partials/footer.ejs") %>
 </body>
 
 </html>
