@@ -28,10 +28,10 @@ const createMessage = async (req, res, next) => {
       return res.status(400).render('partials/errors', { errors: errors.array() });
     }
 
-    const { title, messsage } = matchedData(req);
+    const { title, message } = matchedData(req);
     const userId = req.user.id;
 
-    await db.createMessage(userId, title, messsage);
+    await db.createMessage(userId, title, message);
 
     res.redirect('/message');
   } catch (err) {
