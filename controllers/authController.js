@@ -19,13 +19,13 @@ const getRegsiter = (req, res) => {
 
 const getMessage = async (req, res) => {
   const messages = await getAllMessages();
-  res.render('messages/message', { title: 'All Messages', messages });
+  res.render('messages/message', { title: 'All Messages', userId: req.user.id, isClubMember: req.user.status === 'ACTIVE', messages });
 };
 
 const getMyMessage = async (req, res) => {
   const userId = req.user.id;
   const messages = await getUserMessage(userId);
-  res.render('messages/message', { title: 'My Messages', messages });
+  res.render('messages/message', { title: 'My Messages', userId: req.user.id, isClubMember: req.user.status === 'ACTIVE', messages });
 };
 
 const getNewMessage = (req, res) => {

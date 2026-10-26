@@ -1,3 +1,6 @@
+const path = require('node:path');
+const { loadEnvFile } = require('node:process');
+loadEnvFile(path.join(__dirname, '../.env'));
 const bcrypt = require('bcryptjs');
 const { validationResult, matchedData } = require('express-validator');
 const db = require('../model/queries');
@@ -39,4 +42,24 @@ const createMessage = async (req, res, next) => {
   }
 };
 
-module.exports = { createUser, createMessage };
+const getJoinClub=(req,res)=>{
+  res.render('messages/joinClub')
+}
+
+const validateJoinClub = (req, res) => {
+  const  passcode  = req.body.passcode;
+  const userId=req.user.id;
+  if (passcode !== process.env.CLUB_PASSCODE) {
+    return res.status(400).render('partials/errors', { errors: [{ msg: 'Invalid passcode' }] });
+  }
+  db.updateUserStatus(userId, 'ACTIVE');
+  res.redirect('/message');
+};
+
+const deleteMessage=(req,res)=>{
+  const messageId=req.params.id;
+  db.deleteMessage(messageId);
+  res.redirect('/message');
+}
+
+module.exports = { createUser, createMessage,getJoinClub, validateJoinClub, deleteMessage };

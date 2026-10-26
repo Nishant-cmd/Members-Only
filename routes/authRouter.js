@@ -19,6 +19,9 @@ router.get('/message', requireAuth, authController.getMessage);
 router.get('/new-message', requireAuth, authController.getNewMessage);
 router.post('/new-message', requireAuth, validateMessage, userController.createMessage);
 router.get('/my-messages', requireAuth, authController.getMyMessage);
+router.get('/join-club', requireAuth, userController.getJoinClub);
+router.post('/join-club', requireAuth, userController.validateJoinClub);
 router.use('/logout', requireAuth, authController.logOut);
+router.use('/message/delete/:id', requireAuth, userController.deleteMessage);
 
 module.exports = router;
