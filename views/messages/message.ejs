@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Messages</title>
-  </head>
-  <body>
+    <title><%= title %></title>
+</head>
+
+<body>
     <%-include("../partials/header") %>
-    <main class="messages">
-      <h4>Messages</h4>
-      <div class="message">
-        <p><strong>Admin:</strong> Welcome to the Members-Only area!</p>
-      </div>
-      <div class="message">
-        <p><strong>User:</strong> Thank you! I'm excited to be here.</p>
-      </div>
-    </main>
-    <%- include('../partials/footer.ejs') %>
-  </body>
+        <main class="messages">
+            <h4><%= title %></h4>
+            <% if (messages && messages.length> 0) { %>
+                <% messages.forEach(message=> { %>
+                    <div class="message-container">
+                        <p> <strong>
+                                <%= message.title %>
+                            </strong></p>
+                        <p>
+                            <%= message.description %>
+                        </p>
+                        <p>
+                            <span>from: <%=message.first_name %> <%=message.last_name %></span>
+                            <span> posted on: <%= message.created_at %></span>
+                        </p>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <p> No Message found.</p>
+                            <% } %>
+                         </main>
+        <%- include('../partials/footer.ejs') %>
+</body>
+
 </html>
