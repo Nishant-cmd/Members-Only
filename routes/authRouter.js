@@ -18,6 +18,7 @@ router.post('/login', authController.postLogin);
 router.get('/message', requireAuth, authController.getMessage);
 router.get('/new-message', requireAuth, authController.getNewMessage);
 router.post('/new-message', requireAuth, validateMessage, userController.createMessage);
+router.get('/my-messages', requireAuth, authController.getMyMessage);
 router.use('/logout', requireAuth, authController.logOut);
 
 module.exports = router;
