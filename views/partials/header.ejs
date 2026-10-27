@@ -7,7 +7,7 @@
       <% if(!isClubMember){ %>
       <li><a href="/join-club">Join club</a></li>
       <% } %>
-      <% if(isAdmin){ %>
+      <% if(!isAdmin){ %>
       <li><a href="/admin-access">Admin Access</a></li>
       <% } %>
       <li><a href="/logout">Logout</a></li>
