@@ -27,7 +27,7 @@
                         <%= message.description %>
                     </p>
 
-                    <% if (isClubMember) { %>
+                    <% if (isClubMember || isAdmin) { %>
                         <p>
                             <span>
                                 From: <%= message.first_name %>
@@ -44,7 +44,7 @@
                         </p>
                     <% } %>
 
-                    <% if (message.user_id === userId) { %>
+                    <% if (isAdmin || message.user_id === userId) { %>
                         <a href="/message/delete/<%= message.id %>">
                             Delete
                         </a>

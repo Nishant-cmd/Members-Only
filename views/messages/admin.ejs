@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Members-Only</title>
+  </head>
+  <body>
+    <%- include("../partials/header") %>
+    <main class="join-club">
+      <h4>Become Admin: Contact Developer for admin access</h4>
+      <form action="/admin-access" method="POST">
+        <div>
+          <label for="passcode">Enter admin passcode</label>
+          <input type="text" id="passcode" name="adminPasscode" required />
+        </div>
+        <button type="submit">Become Admin</button>
+      </form>
+      <a href="/message">Back to Messages</a>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>
