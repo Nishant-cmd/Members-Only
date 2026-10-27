@@ -47,6 +47,10 @@ async function deleteMessage(messageId){
   await pool.query('DELETE FROM messages WHERE id=$1', [messageId]);
 }
 
+async function updateAdminStatus(userId, status) {
+  await pool.query("UPDATE users SET is_admin=$1 WHERE id=$2", [status, userId]);
+}
+
 module.exports = {
   createUser,
   getUser,
@@ -55,5 +59,6 @@ module.exports = {
   getAllMessages,
   getUserMessage,
   updateUserStatus,
-  deleteMessage
+  deleteMessage,
+  updateAdminStatus
 };
