@@ -56,10 +56,23 @@ const validateJoinClub = (req, res) => {
   res.redirect('/message');
 };
 
+const getAdminAccess=(req,res)=>{
+  res.render('messages/admin')
+}
+const validateAdminAccess = (req, res) => {
+  const  passcode  = req.body.adminPasscode;
+  const userId=req.user.id;
+  if (passcode !== process.env.ADMIN_PASSCODE) {
+    return res.status(400).render('partials/errors', { errors: [{ msg: 'Invalid passcode' }] });
+  }
+  db.updateAdminStatus(userId, true);
+  res.redirect('/message');
+};
+
 const deleteMessage=(req,res)=>{
   const messageId=req.params.id;
   db.deleteMessage(messageId);
   res.redirect('/message');
 }
 
-module.exports = { createUser, createMessage,getJoinClub, validateJoinClub, deleteMessage };
+module.exports = { createUser, createMessage,getJoinClub, validateJoinClub, deleteMessage,getAdminAccess,validateAdminAccess };
