@@ -1,0 +1,11 @@
+.site-footer {
+  border-top: var(--border);
+  padding: 1.25rem 2rem;
+  text-align: center;
+}
+
+.site-footer p {
+  font-size: 0.8125rem;
+  color: var(--gray-400);
+  letter-spacing: 0.04em;
+}

@@ -1,0 +1,105 @@
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+}
+
+.login-form,
+.create-message,
+.join-club {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  outline: none;
+  transition: box-shadow var(--transition);
+  appearance: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--gray-400);
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 2px var(--black);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+button[type="submit"] {
+  align-self: flex-start;
+  padding: 0.75rem 2rem;
+  background-color: var(--black);
+  color: var(--white);
+  border: var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+button[type="submit"]:hover {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+form + div p,
+form + p,
+main > a,
+.create-message > a,
+.join-club > a {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+main > a,
+.create-message > a,
+.join-club > a {
+  display: inline-block;
+  margin-top: 1rem;
+  border-bottom: 1px solid currentColor;
+}
